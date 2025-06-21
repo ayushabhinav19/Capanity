@@ -10,31 +10,42 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Navbar scroll-spy
+  const sections = document.querySelectorAll('section');
   const navLinks = document.querySelectorAll('.nav-links a');
-  const sections = document.querySelectorAll('section[id]');
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          const navLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.6 
+  };
 
-          if (navLink) {
-            navLinks.forEach((link) => {
-              link.classList.remove('active');
-            });
-            navLink.classList.add('active');
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      const heading = entry.target.querySelector('h2');
+      
+      if (entry.isIntersecting) {
+        // Handle nav links
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === entry.target.id) {
+            link.classList.add('active');
           }
+        });
+        
+        // Handle heading underline
+        if (heading) {
+          heading.classList.add('active-heading');
         }
-      });
-    },
-    {
-      threshold: 0.6,
-    }
-  );
+      } else {
+        // Remove heading underline when not intersecting
+        if (heading) {
+          heading.classList.remove('active-heading');
+        }
+      }
+    });
+  }, observerOptions);
 
-  sections.forEach((section) => {
+  sections.forEach(section => {
     observer.observe(section);
   });
 
