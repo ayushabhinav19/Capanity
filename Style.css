@@ -382,7 +382,9 @@ body::after {
 
 /* Hero Section Space Theme */
 .hero {
-  background: transparent;
+  background-image: url('BG2.png');
+  background-size: cover;
+  background-position: center;
   text-align: center;
   padding: 120px 20px 100px;
   min-height: 100vh;
@@ -399,13 +401,15 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, rgba(0, 196, 255, 0.1) 0%, transparent 70%);
-  z-index: -1;
+  background: rgba(10, 10, 15, 0.7);
+  z-index: 0;
 }
 
 .hero-content {
   max-width: 800px;
   animation: float 6s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-content h1 {
@@ -659,8 +663,8 @@ section h2.active-heading::after {
 }
 
 .team-member img {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   margin-bottom: 1rem;
   border: 4px solid rgba(0, 196, 255, 0.3);
